@@ -1,0 +1,57 @@
+<section class="login-container">
+  <div class="login-card animate-fade-in-up">
+    <h1 class="login-title animate-slide-in-right animate-delay-100">تسجيل الدخول إلى حسابك</h1>
+    
+    <form class="login-form" action="/login" method="post">
+      <div class="input-group animate-slide-in-right animate-delay-200">
+        <label for="email_user">اسم المستخدم</label>
+        <input 
+          type="email" 
+          id="email_user" 
+          name="email_user" 
+          placeholder="example@crda.com" 
+          required
+          class="hover-scale"
+        >
+      </div>
+
+      <div class="input-group animate-slide-in-right animate-delay-300">
+        <label for="password_user">كلمة المرور</label>
+        <input 
+          type="password" 
+          id="password_user" 
+          name="password_user" 
+          placeholder="••••••••" 
+          required
+          class="hover-scale"
+        >
+      </div>
+
+      <div class="remember-forgot animate-fade-in-up animate-delay-400">
+        <div class="checkbox-group">
+          <input type="checkbox" id="remember" class="hover-scale">
+          <label for="remember" class="hover-underline">تذكرني</label>
+        </div>
+        <a href="#" class="forgot-password hover-underline">نسيت كلمة المرور؟</a>
+      </div>
+
+      <button type="submit" class="login-button hover-scale animate-delay-500">
+        <span class="button-text">تسجيل الدخول</span>
+      </button>
+
+      <p class="register-link animate-fade-in-up animate-delay-600">
+        ليس لديك حساب؟ 
+        <a href="/register" class="hover-underline">سجل الآن</a>
+      </p>
+    </form>
+  </div>
+</section>
+
+<script>
+  document.querySelector('.login-form').addEventListener('submit', (e) => {
+  const button = e.target.querySelector('button');
+  button.innerHTML = `<div class="loading-spinner"></div> جاري التحميل...`;
+  button.disabled = true;
+});
+</script>
+

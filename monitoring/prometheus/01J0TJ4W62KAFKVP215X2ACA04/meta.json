@@ -1,0 +1,17 @@
+{
+	"ulid": "01J0TJ4W62KAFKVP215X2ACA04",
+	"minTime": 1718860835544,
+	"maxTime": 1718863200000,
+	"stats": {
+		"numSamples": 125269,
+		"numSeries": 850,
+		"numChunks": 855
+	},
+	"compaction": {
+		"level": 1,
+		"sources": [
+			"01J0TJ4W62KAFKVP215X2ACA04"
+		]
+	},
+	"version": 1
+}

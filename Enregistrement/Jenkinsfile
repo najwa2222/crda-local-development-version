@@ -1,0 +1,63 @@
+pipeline {
+    agent any
+
+    environment {
+        KUBECONFIG = 'C:\\Users\\acer\\.kube\\config'
+        DOCKERFILE_PATH = 'C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\app\\backend\\enregistrement\\Dockerfile'
+        DOCKER_IMAGE = 'najwakarrouchi/enregistrement'
+        DOCKER_TAG = 'latest'
+    }
+
+    stages {
+        stage('Set Up Environment') {
+            steps {
+                echo 'Setting up environment...'
+                script {
+                    bat "echo KUBECONFIG Path: ${KUBECONFIG}"
+                    bat "echo Configuration du chemin Docker : ${DOCKERFILE_PATH}"
+                }
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    echo "Building Docker image..."
+                    bat "docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} -f ${DOCKERFILE_PATH.replace('\\', '/')} ."
+                }
+            }
+        }
+
+        stage('Verify Docker Image') {
+            steps {
+                script {
+                    echo "Verifying and pulling Docker image..."
+                    bat """
+                    docker pull ${DOCKER_IMAGE}:${DOCKER_TAG}
+                    docker images ${DOCKER_IMAGE}:${DOCKER_TAG}
+                    """
+                }
+            }
+        }
+
+        stage('Deploy to Kubernetes') {
+            steps {
+                script {
+                    def kubeconfig = env.KUBECONFIG
+                    def yamlFile = "C:/ProgramData/Jenkins/.jenkins/workspace/app/backend/enregistrement/deployment-enregistrement.yaml"
+                    
+                    bat "kubectl apply -f ${yamlFile} -n enregistrement --kubeconfig ${kubeconfig}"
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Deployment succeeded!'
+        }
+        failure {
+            echo 'Deployment failed!'
+        }
+    }
+}

@@ -1,0 +1,48 @@
+const express = require('express');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
+const app = express();
+const PORT = 3001;
+
+// Utilisateur enregistré (simulé)
+const users = [
+  { id: 1, username: 'user1', password: '*97E7471D816A37E38510728AEA47440F9C6E2585'  } // Mot de passe : password1
+];
+
+// Middleware pour vérifier le JWT et autoriser l'accès aux ressources protégées
+const authenticateToken = (req, res, next) => {
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];
+  if (!token) {
+    return res.status(401).send('Accès non autorisé');
+  }
+
+  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
+    if (err) {
+      return res.status(403).send('Token expiré ou invalide');
+    }
+    req.user = user;
+    next();
+  });
+};
+
+// Endpoint pour l'authentification (connexion)
+app.get('/login', async (req, res) => {
+  const { username, password } = req.body;
+  const user = users.find(u => u.username === username);
+  if (!user || !(await bcrypt.compare(password, user.password))) {
+    return res.status(401).send('Nom d\'utilisateur ou mot de passe incorrect');
+  }
+
+  const accessToken = jwt.sign({ username: user.username }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '15m' });
+  res.json({ accessToken });
+});
+
+// Endpoint protégé pour récupérer des données sensibles
+app.get('/protected-data', authenticateToken, (req, res) => {
+  res.json({ data: 'Ces données sont protégées' });
+});
+
+app.listen(3001, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
+});

@@ -1,0 +1,79 @@
+http:
+  port: 4000
+
+apiEndpoints:
+  auth:
+    host: '*'
+    paths: '/auth/*'
+  documents:
+    host: '*'
+    paths: '/gestiondocuments/*'
+  notifications:
+    host: '*'
+    paths: '/notifications/*'
+  controllers:
+    host: '*'
+    paths: '/controllers/*'
+  enregistrement:
+    host: '*'
+    paths: '/enregistrement/*'
+  views:
+    host: '*'
+    paths: '/*'
+
+serviceEndpoints:
+  auth_service:
+    url: 'http://localhost:3001'
+  gestiondocument_service:
+    url: 'http://localhost:3004'
+  notification_service:
+    url: 'http://localhost:3003'
+  controllers_service:
+    url: 'http://localhost:3000'
+  enregistrement_service:
+    url: 'http://localhost:3002'
+  views_service:
+    url: 'http://localhost:4200'
+
+policies:
+  - basic-auth
+  - cors
+  - expression
+  - key-auth
+  - log
+  - oauth2
+  - proxy
+  - rate-limit
+  - request-transformer
+  - response-handler
+  - jwt
+
+pipelines:
+  default:
+    apiEndpoints:
+      - auth
+      - controllers
+      - enregistrement
+      - notifications
+      - documents
+      - views
+    policies:
+      - proxy:
+          - action:
+              serviceEndpoint: auth_service
+              changeOrigin: true
+          - action:
+              serviceEndpoint: gestiondocument_service
+              changeOrigin: true
+          - action:
+              serviceEndpoint: notification_service
+              changeOrigin: true
+          - action:
+              serviceEndpoint: controllers_service
+              changeOrigin: true
+          - action:
+              serviceEndpoint: enregistrement_service
+              changeOrigin: true
+          - action:
+              serviceEndpoint: views_service
+              changeOrigin: true

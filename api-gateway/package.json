@@ -1,0 +1,13 @@
+{
+  "name": "api-gateway",
+  "version": "1.0.0",
+  "description": "API Gateway using Express.js",
+  "main": "index.js",
+  "scripts": {
+    "build": "RUN npm install",
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

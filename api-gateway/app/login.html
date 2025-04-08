@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/css/style.css" rel="stylesheet" type="text/css" />
+    <title>Login</title>
+</head>
+<body>
+    <div class="main-container">
+        <img src="/eg-icon.svg" alt="Express Gateway Logo" /> <!-- Corriger le chemin de l'image -->
+        <form action="/login" method="post" class="login-form"> <!-- Assurez-vous que l'action pointe vers "/login" -->
+            <div class="form-row">
+                <label>Username:</label>
+                <input type="text" name="username" value="najwakarrouchi@gmail.com" /><br />
+            </div>
+            <div class="form-row">
+                <label>Password:</label>
+                <input type="password" name="password" value="58877615" />
+            </div>
+            <div class="form-row button-container">
+                <button type="submit">Submit</button> <!-- Supprimez l'attribut formmethod -->
+            </div>
+        </form>
+    </div>
+</body>
+</html>

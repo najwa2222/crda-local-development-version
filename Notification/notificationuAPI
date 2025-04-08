@@ -1,0 +1,17 @@
+const express = require('express');
+const bodyParser = require('body-parser');
+const app = express();
+const PORT = 3000;
+
+app.use(bodyParser.json());
+
+// Endpoint pour recevoir les notifications
+app.post('/notifications', (req, res) => {
+  const { message } = req.body;
+  console.log('Notification reçue :', message);
+  res.status(200).send('Notification reçue avec succès');
+});
+
+app.listen(3003, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
+});

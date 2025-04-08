@@ -1,0 +1,14 @@
+{
+  "name": "recherche",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build":"RUN npm install",
+    "test": "jest",
+    "sonarqube": " npm run sonarqube"
+    
+  },
+  "author": "",
+  "license": "ISC"
+}

@@ -1,0 +1,48 @@
+{
+  "name": "bakend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha",
+    "dev": "tailwindcss -i ./public/css/tailwind.css -o ./public/css/styles.css --watch",
+    "build": "tailwindcss -i ./public/css/tailwind.css -o ./public/css/styles.css --minify",
+    "start": "nodemon app.js",
+    "css": "npx tailwindcss -i ./src/input.css -o ./public/css/styles.css"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@google-cloud/recaptcha-enterprise": "^5.13.0",
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.2",
+    "chromedriver": "^126.0.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.19.2",
+    "express-handlebars": "^7.1.2",
+    "express-rate-limit": "^7.5.0",
+    "express-session": "^1.18.1",
+    "jsonwebtoken": "^9.0.2",
+    "method-override": "^3.0.0",
+    "mocha": "^10.4.0",
+    "mongoose": "^8.3.1",
+    "mysql": "^2.18.1",
+    "mysql2": "^3.11.5",
+    "nodemon": "^3.1.0",
+    "prom-client": "^15.1.2",
+    "prometheus": "^0.1.7",
+    "selenium-webdriver": "^4.21.0",
+    "sequelize": "^6.37.3"
+  },
+  "devDependencies": {
+    "@types/mysql": "^2.15.26",
+    "autoprefixer": "^10.4.20",
+    "jasmine": "^5.1.0",
+    "jest": "^29.7.0",
+    "postcss": "^8.5.1",
+    "supertest": "^7.0.0",
+    "tailwindcss": "^3.4.17"
+  },
+  "keywords": [],
+  "description": ""
+}
